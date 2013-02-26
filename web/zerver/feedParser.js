@@ -10,9 +10,10 @@ function init () {
     obj.title   = article['title'];
     obj.content = article['description'];
     obj.link    = article['link'];
-    articles.push(obj);
+    var i = articles.push(obj) - 1;
+    (articles[i]).index = i;
     if( articles.length === 10 ){
-      promise.resolve(this.articles);
+      promise.resolve(articles);
     }
   }
 
@@ -20,7 +21,6 @@ function init () {
 
   return promise;
 }
-
 
 exports.getArticles = function(callback) {
   init().then(function(articles) {
